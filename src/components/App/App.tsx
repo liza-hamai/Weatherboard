@@ -15,17 +15,8 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [notFound, setNotFound] = useState(false);
 
-  // --- search history -------------------------------------------------------
-  // TODO (main task): hold the list of recently searched cities here.
-  // Requirements:
-  //   - keep at most 5 cities
-  //   - newest first
-  //   - no duplicates (compare by city.id)
-  //   - add a city only after its weather loads successfully
   const [history] = useState<City[]>([]);
 
-  // Loads weather for an already-resolved city (used by history clicks too,
-  // so it must NOT geocode again).
   const loadWeatherFor = async (target: City) => {
     setLoading(true);
     setError(null);
@@ -34,7 +25,6 @@ export default function App() {
       const current = await fetchWeather(target.latitude, target.longitude);
       setCity(target);
       setWeather(current);
-      // TODO (main task): push `target` into history here (dedup, max 5).
     } catch {
       setError("Couldn't load weather. Check your connection and try again.");
       setWeather(null);
@@ -43,7 +33,6 @@ export default function App() {
     }
   };
 
-  // Called from the search bar: name -> coordinates -> weather.
   const handleSearch = async (name: string) => {
     setLoading(true);
     setError(null);
@@ -59,7 +48,6 @@ export default function App() {
       const current = await fetchWeather(resolved.latitude, resolved.longitude);
       setCity(resolved);
       setWeather(current);
-      // TODO (main task): push `resolved` into history here (dedup, max 5).
     } catch {
       setError("Couldn't load weather. Check your connection and try again.");
       setWeather(null);
@@ -79,8 +67,7 @@ export default function App() {
 
       <SearchBar onSubmit={handleSearch} />
 
-      {/* When history is implemented, these chips reload a city instantly. */}
-      <HistoryList history={history} onSelect={loadWeatherFor} />
+      <HistoryList onSelect={loadWeatherFor} />
 
       {loading && <Loader />}
       {error && <ErrorMessage text={error} />}

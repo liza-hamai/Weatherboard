@@ -9,10 +9,8 @@ interface WeatherCardProps {
 /**
  * Maps an Open-Meteo WMO weather code to a short description + emoji.
  *
- * ⚠️ INCOMPLETE ON PURPOSE (optional task).
  * Only a few codes are filled in. The full WMO code table is documented by
  * Open-Meteo. Any code that isn't listed here falls back to "Unknown".
- * See README → "Optional task #2".
  */
 function describeWeather(code: number): { label: string; icon: string } {
   const map: Record<number, { label: string; icon: string }> = {
