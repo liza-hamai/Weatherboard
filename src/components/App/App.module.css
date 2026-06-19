@@ -1,0 +1,31 @@
+.app {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 56px 20px 80px;
+}
+.header { margin-bottom: 28px; }
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.title::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 4px;
+  margin-top: 10px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.subtitle {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.hint {
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 14px;
+}
